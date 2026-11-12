@@ -13,7 +13,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.gastrovote.R // Asegúrate de importar tus recursos correctamente
+import com.example.gastrovote.R
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.StarBorder
+import androidx.compose.ui.graphics.Color
+import com.example.gastrovote.model.Bar
 
 // ==========================================
 // A. CABECERA DE LA APP
@@ -25,9 +31,6 @@ fun CabeceraComponent(
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
-        // Banner superior (puedes cambiar la imagen en drawable por la tuya propia)
-        // Nota: Asegúrate de tener un recurso de imagen en res/drawable, por ejemplo "banner_tapas"
-        // o usa un Box con color/imagen de prueba.
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -82,7 +85,7 @@ fun SelectorBarComponent(
             text = "ELIGE EL BAR",
             style = MaterialTheme.typography.labelLarge,
             color = MaterialTheme.colorScheme.primary,
-            modifier = modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -92,7 +95,7 @@ fun SelectorBarComponent(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            // Botón Bar Anterior (FilledTonalButton según tabla de equivalencias)
+            // Botón Bar Anterior
             FilledTonalIconButton(onClick = onAnteriorClick) {
                 Icon(
                     imageVector = Icons.Default.KeyboardArrowLeft,
@@ -122,6 +125,92 @@ fun SelectorBarComponent(
                     imageVector = Icons.Default.KeyboardArrowRight,
                     contentDescription = "Bar siguiente"
                 )
+            }
+        }
+    }
+}
+
+// ==========================================
+// C. FICHA DEL BAR (TARJETA)
+// ==========================================
+@Composable
+fun FichaBarComponent(
+    bar: Bar,
+    onFavoritoClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            // Fila superior: Nombre de la Tapa y Botón Favorito (Corazón)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = bar.nombreTapa,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+
+                // Botón de favorito
+                IconButton(onClick = onFavoritoClick) {
+                    Icon(
+                        imageVector = if (bar.esFavorito) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                        contentDescription = "Marcar como favorita",
+                        tint = if (bar.esFavorito) Color(0xFFb23a1e) else MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            // Descripción de la tapa
+            Text(
+                text = bar.descripcionTapa,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Fila inferior: Precio y Estrellas estáticas de valoración media
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "${bar.precioBase} €",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    repeat(5) { index ->
+                        Icon(
+                            imageVector = if (index < bar.puntuacionMedia) Icons.Default.Star else Icons.Default.StarBorder,
+                            contentDescription = null,
+                            tint = Color(0xFFFFC107),
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                }
             }
         }
     }

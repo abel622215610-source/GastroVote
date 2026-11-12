@@ -15,10 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.gastrovote.ui.components.CabeceraComponent
-import com.example.gastrovote.ui.components.SelectorBarComponent
 import com.example.gastrovote.ui.theme.GastroVoteTheme
 import com.example.gastrovote.ui.viewmodel.GastroViewModel
+import com.example.gastrovote.ui.components.*
 
 
 class MainActivity : ComponentActivity() {
@@ -58,7 +57,40 @@ fun PantallaPrincipalGastroVote(
             onSiguienteClick = { viewModel.siguienteBar() }
         )
 
-        // Aquí debajo irán después la Ficha del Bar, el Formulario, etc.
+        Spacer(modifier = Modifier.height(8.dp))
+
+        FichaBarComponent(
+            bar = viewModel.barActual,
+            onFavoritoClick = { viewModel.alternarFavoritoBarActual() } // Función que pondremos en el ViewModel para cambiar el corazón
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Formulario de reseña que acabamos de crear
+        FormularioComponent(
+            tamanoSeleccionado = viewModel.tamanoSeleccionado,
+            onTamanoChange = { viewModel.tamanoSeleccionado = it },
+            puntuacionEstrellas = viewModel.puntuacionEstrellas,
+            onEstrellasChange = { viewModel.puntuacionEstrellas = it },
+            calidadPrecio = viewModel.calidadPrecio,
+            onCalidadPrecioChange = { viewModel.calidadPrecio = it },
+            esVegetariana = viewModel.esVegetariana,
+            onVegetarianaChange = { viewModel.esVegetariana = it },
+            esSinGluten = viewModel.esSinGluten,
+            onSinGlutenChange = { viewModel.esSinGluten = it },
+            esPicante = viewModel.esPicante,
+            onPicanteChange = { viewModel.esPicante = it },
+            meGusta = viewModel.meGusta,
+            onMeGustaChange = { viewModel.meGusta = it },
+            descuentoEstudiante = viewModel.descuentoEstudiante,
+            onDescuentoChange = { viewModel.descuentoEstudiante = it },
+            comentario = viewModel.comentario,
+            onComentarioChange = { viewModel.comentario = it },
+            onLimpiarClick = { viewModel.limpiarFormularioCompleto() },
+            onPublicarClick = { viewModel.publicarResena() },
+            resumenTexto = viewModel.resumenResenaTexto,
+            progresoBares = viewModel.progresoBaresReseniados,
+            totalBares = viewModel.listaBares.size
+        )
     }
 }
 

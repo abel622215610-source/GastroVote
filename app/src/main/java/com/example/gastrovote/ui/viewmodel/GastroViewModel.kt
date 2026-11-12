@@ -63,11 +63,19 @@ class GastroViewModel : ViewModel() {
     }
 
     // --- FAVORITOS (L2) ---
+
     fun alternarFavoritoBarActual() {
-        val bar = barActual
-        bar.esFavorito = !bar.esFavorito
-        // Forzar recomposición actualizando el elemento en la lista
-        listaBares[indiceBarActual] = bar
+        // 1. Cogemos el objeto Bar en el que estamos posicionados ahora mismo
+        val barActual = listaBares[indiceBarActual]
+
+        // 2. Invertimos su estado de favorito (si era falso pasa a true, y viceversa)
+        barActual.esFavorito = !barActual.esFavorito
+
+        // 3. ¡LA CLAVE!: Como listaBares es un 'mutableStateListOf', a veces
+        // cambiar una propiedad interna de un objeto no hace que Compose se entere
+        // al milisegundo. Al hacer esta reasignación en el índice exacto...
+        val index = indiceBarActual
+        listaBares[index] = barActual // ...obligamos a Compose a detectar el cambio y redibujar al instante.
     }
 
     // --- PUBLICAR RESEÑA (L6, L7) ---

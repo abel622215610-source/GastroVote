@@ -7,5 +7,6 @@ data class Bar(
     val descripcionTapa: String,
     val precioBase: Double,
     val puntuacionMediaTapa: Float,
-    var esFavorito: Boolean = false
+    var esFavorito: Boolean = false,
+    var puntuacionMedia: Int = 4
 )
