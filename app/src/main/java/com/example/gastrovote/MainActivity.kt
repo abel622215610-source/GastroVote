@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -39,7 +41,8 @@ fun PantallaPrincipalGastroVote(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState()) // ¡Requisito de desplazamiento vertical![cite: 2, 4]
+            .verticalScroll(rememberScrollState())
+            .imePadding()
     ) {
 
         Spacer(modifier = Modifier.height(23.dp))
@@ -48,7 +51,7 @@ fun PantallaPrincipalGastroVote(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // 2. Selector de Bares (conectado a las funciones del ViewModel)[cite: 3, 4]
+        // 2. Selector de Bares
         SelectorBarComponent(
             nombreBarActual = viewModel.barActual.nombreBar,
             indiceActual = viewModel.indiceBarActual,
@@ -61,11 +64,11 @@ fun PantallaPrincipalGastroVote(
 
         FichaBarComponent(
             bar = viewModel.barActual,
-            onFavoritoClick = { viewModel.alternarFavoritoBarActual() } // Función que pondremos en el ViewModel para cambiar el corazón
+            onFavoritoClick = { viewModel.alternarFavoritoBarActual() }
         )
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Formulario de reseña que acabamos de crear
+        // 3. Formulario de reseña
         FormularioComponent(
             tamanoSeleccionado = viewModel.tamanoSeleccionado,
             onTamanoChange = { viewModel.tamanoSeleccionado = it },

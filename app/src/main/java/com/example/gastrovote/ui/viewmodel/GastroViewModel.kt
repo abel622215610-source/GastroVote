@@ -10,7 +10,6 @@ import com.example.gastrovote.model.Bar
 
 class GastroViewModel : ViewModel() {
 
-    // Lista de los 8 bares de la ruta (puedes adaptarla o cargarla de recursos)
     val listaBares = mutableStateListOf(
         Bar(0, "Taberna La Marinera", "Marinera", "Rosadilla con ensaladilla y anchoa", 2.50, 4.0f),
         Bar(1, "Bar El Rinconcito", "Croqueta Casera", "Croqueta cremosa de jamón ibérico", 1.80, 4.5f),
@@ -22,12 +21,12 @@ class GastroViewModel : ViewModel() {
         Bar(7, "El Último trago", "Paparajote", "Hoja de limón con masa frita y azúcar", 2.00, 4.7f)
     )
 
-    // Índice del bar seleccionado actualmente (de 0 a 7)
+    // Índice del bar seleccionado actualmente
     var indiceBarActual by mutableStateOf(0)
         private set
 
     // --- ESTADOS DEL FORMULARIO DE RESEÑA ---
-    var tamanoSeleccionado by mutableStateOf("Tapa") // "Tapa", "Media ración", "Ración"
+    var tamanoSeleccionado by mutableStateOf("Tapa") // "Tapa", "Media", "Ración"
     var puntuacionEstrellas by mutableStateOf(0)     // 0 a 5
     var calidadPrecio by mutableStateOf(5f)          // 0 a 10
     var esVegetariana by mutableStateOf(false)

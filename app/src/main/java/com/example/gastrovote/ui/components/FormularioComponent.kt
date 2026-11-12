@@ -45,88 +45,10 @@ fun FormularioComponent(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(horizontal = 10.dp, vertical = 8.dp)
     ) {
-        // ==========================================
-        // 1. CHECKBOXES SUPERIORES (Alérgenos / Tipo)
-        // ==========================================
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Checkbox(checked = esVegetariana, onCheckedChange = onVegetarianaChange)
-                Text(text = "Vegetariana", style = MaterialTheme.typography.bodySmall)
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Checkbox(checked = esSinGluten, onCheckedChange = onSinGlutenChange)
-                Text(text = "Sin gluten", style = MaterialTheme.typography.bodySmall)
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Checkbox(checked = esPicante, onCheckedChange = onPicanteChange)
-                Text(text = "Picante", style = MaterialTheme.typography.bodySmall)
-            }
-        }
 
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // ==========================================
-        // 2. SWITCH "ME GUSTA"
-        // ==========================================
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(text = "Me gusta", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
-                Spacer(modifier = Modifier.width(8.dp))
-                Switch(
-                    checked = meGusta,
-                    onCheckedChange = onMeGustaChange,
-                    colors = SwitchDefaults.colors(checkedThumbColor = Color(0xFFb23a1e), checkedTrackColor = Color(0xFFb23a1e).copy(alpha = 0.5f))
-                )
-            }
-            Text(
-                text = if (meGusta) "¡Te gusta esta tapa!" else "",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.primary
-            )
-        }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // ==========================================
-        // 3. DESCUENTO ESTUDIANTE
-        // ==========================================
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Checkbox(checked = descuentoEstudiante, onCheckedChange = onDescuentoChange)
-            Text(text = "Descuento estudiante (10%)", style = MaterialTheme.typography.bodyMedium)
-        }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        // ==========================================
-        // 4. CAMPO DE TEXTO (COMENTARIO)
-        // =|=========================================
-        OutlinedTextField(
-            value = comentario,
-            onValueChange = onComentarioChange,
-            modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text("Muy buena, repetiría la próxima semana") },
-            singleLine = true,
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // ==========================================
-        // 5. TÍTULO SECCIÓN "TU RESEÑA"
-        // ==========================================
+        // TÍTULO SECCIÓN "TU RESEÑA"
         Text(
             text = "TU RESEÑA",
             style = MaterialTheme.typography.titleMedium,
@@ -182,10 +104,11 @@ fun FormularioComponent(
             }
 
             val textoOpinion = when (puntuacionEstrellas) {
-                1 -> "Mejorable"
-                2 -> "Correcta"
-                3 -> "¡Muy buena!"
-                4, 5 -> "¡Espectacular!"
+                1 -> "Terrible"
+                2 -> "Aceptable"
+                3 -> "Bueno"
+                4 -> "Muy bueno"
+                5 -> "¡Espectacular!"
                 else -> ""
             }
             Text(
@@ -217,23 +140,90 @@ fun FormularioComponent(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // ==========================================
-        // 6. BOTONES: LIMPIAR / PUBLICAR RESEÑA
-        // ==========================================
+        // CHECKBOXES (Alérgenos y tipos)
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Checkbox(checked = esVegetariana, onCheckedChange = onVegetarianaChange)
+                Text(text = "Vegetariana", style = MaterialTheme.typography.bodySmall)
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Checkbox(checked = esSinGluten, onCheckedChange = onSinGlutenChange)
+                Text(text = "Sin gluten", style = MaterialTheme.typography.bodySmall)
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Checkbox(checked = esPicante, onCheckedChange = onPicanteChange)
+                Text(text = "Picante", style = MaterialTheme.typography.bodySmall)
+            }
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // SWITCH "ME GUSTA"
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(text = "Me gusta", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
+                Spacer(modifier = Modifier.width(8.dp))
+                Switch(
+                    checked = meGusta,
+                    onCheckedChange = onMeGustaChange,
+                    colors = SwitchDefaults.colors(checkedThumbColor = Color(0xFFb23a1e), checkedTrackColor = Color(0xFFb23a1e).copy(alpha = 0.5f))
+                )
+            }
+            Text(
+                text = if (meGusta) "¡Te gusta esta tapa!" else "",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // DESCUENTO ESTUDIANTE
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Checkbox(checked = descuentoEstudiante, onCheckedChange = onDescuentoChange)
+            Text(text = "Descuento estudiante (10%)", style = MaterialTheme.typography.bodyMedium)
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // CAMPO DE TEXTO (COMENTARIO TAPA)
+        OutlinedTextField(
+            value = comentario,
+            onValueChange = onComentarioChange,
+            modifier = Modifier.fillMaxWidth(),
+            placeholder = { Text("Muy buena, repetiría la próxima semana") },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
+        )
+
+        // BOTONES: LIMPIAR / PUBLICAR RESEÑA
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Button(
                 onClick = onLimpiarClick,
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFd8cbe8)) // Tono lila claro de los bocetos
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFd8cbe8))
             ) {
                 Text(text = "LIMPIAR", color = Color.Black)
             }
 
             Button(
                 onClick = onPublicarClick,
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFb23a1e)) // Color primario rojizo
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFb23a1e))
             ) {
                 Text(text = "PUBLICAR RESEÑA", color = Color.White)
             }
@@ -241,13 +231,11 @@ fun FormularioComponent(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // ==========================================
-        // 7. TARJETA DE RESULTADOS (Si se ha publicado)
-        // ==========================================
+        // TARJETA DE RESULTADOS
         if (resumenTexto.isNotBlank()) {
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF3E0)) // Fondo crema/naranja suave
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF3E0))
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
@@ -260,9 +248,7 @@ fun FormularioComponent(
             Spacer(modifier = Modifier.height(16.dp))
         }
 
-        // ==========================================
-        // 8. BARRA DE PROGRESO DE LA RUTA
-        // ==========================================
+        // BARRA DE PROGRESO DE LA RUTA
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
