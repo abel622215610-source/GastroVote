@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -38,62 +39,69 @@ class MainActivity : ComponentActivity() {
 fun PantallaPrincipalGastroVote(
     viewModel: GastroViewModel = viewModel()
 ) {
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
             .imePadding()
     ) {
+        item {
+            Spacer(modifier = Modifier.height(23.dp))
 
-        Spacer(modifier = Modifier.height(23.dp))
-        // 1. Cabecera
-        CabeceraComponent()
+            // 1. Cabecera
+            CabeceraComponent()
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
+        }
 
-        // 2. Selector de Bares
-        SelectorBarComponent(
-            nombreBarActual = viewModel.barActual.nombreBar,
-            indiceActual = viewModel.indiceBarActual,
-            totalBares = viewModel.listaBares.size,
-            onAnteriorClick = { viewModel.anteriorBar() },
-            onSiguienteClick = { viewModel.siguienteBar() }
-        )
+        item {
+            // 2. Selector de Bares
+            SelectorBarComponent(
+                nombreBarActual = viewModel.barActual.nombreBar,
+                indiceActual = viewModel.indiceBarActual,
+                totalBares = viewModel.listaBares.size,
+                onAnteriorClick = { viewModel.anteriorBar() },
+                onSiguienteClick = { viewModel.siguienteBar() }
+            )
 
-        Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(8.dp))
+        }
 
-        FichaBarComponent(
-            bar = viewModel.barActual,
-            onFavoritoClick = { viewModel.alternarFavoritoBarActual() }
-        )
-        Spacer(modifier = Modifier.height(8.dp))
+        item{
+            FichaBarComponent(
+                bar = viewModel.barActual,
+                onFavoritoClick = { viewModel.alternarFavoritoBarActual() }
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+        }
 
-        // 3. Formulario de reseña
-        FormularioComponent(
-            tamanoSeleccionado = viewModel.tamanoSeleccionado,
-            onTamanoChange = { viewModel.tamanoSeleccionado = it },
-            puntuacionEstrellas = viewModel.puntuacionEstrellas,
-            onEstrellasChange = { viewModel.puntuacionEstrellas = it },
-            calidadPrecio = viewModel.calidadPrecio,
-            onCalidadPrecioChange = { viewModel.calidadPrecio = it },
-            esVegetariana = viewModel.esVegetariana,
-            onVegetarianaChange = { viewModel.esVegetariana = it },
-            esSinGluten = viewModel.esSinGluten,
-            onSinGlutenChange = { viewModel.esSinGluten = it },
-            esPicante = viewModel.esPicante,
-            onPicanteChange = { viewModel.esPicante = it },
-            meGusta = viewModel.meGusta,
-            onMeGustaChange = { viewModel.meGusta = it },
-            descuentoEstudiante = viewModel.descuentoEstudiante,
-            onDescuentoChange = { viewModel.descuentoEstudiante = it },
-            comentario = viewModel.comentario,
-            onComentarioChange = { viewModel.comentario = it },
-            onLimpiarClick = { viewModel.limpiarFormularioCompleto() },
-            onPublicarClick = { viewModel.publicarResena() },
-            resumenTexto = viewModel.resumenResenaTexto,
-            progresoBares = viewModel.progresoBaresReseniados,
-            totalBares = viewModel.listaBares.size
-        )
+        item{
+            // 3. Formulario de reseña
+            FormularioComponent(
+                tamanoSeleccionado = viewModel.tamanoSeleccionado,
+                onTamanoChange = { viewModel.tamanoSeleccionado = it },
+                puntuacionEstrellas = viewModel.puntuacionEstrellas,
+                onEstrellasChange = { viewModel.puntuacionEstrellas = it },
+                calidadPrecio = viewModel.calidadPrecio,
+                onCalidadPrecioChange = { viewModel.calidadPrecio = it },
+                esVegetariana = viewModel.esVegetariana,
+                onVegetarianaChange = { viewModel.esVegetariana = it },
+                esSinGluten = viewModel.esSinGluten,
+                onSinGlutenChange = { viewModel.esSinGluten = it },
+                esPicante = viewModel.esPicante,
+                onPicanteChange = { viewModel.esPicante = it },
+                meGusta = viewModel.meGusta,
+                onMeGustaChange = { viewModel.meGusta = it },
+                descuentoEstudiante = viewModel.descuentoEstudiante,
+                onDescuentoChange = { viewModel.descuentoEstudiante = it },
+                comentario = viewModel.comentario,
+                onComentarioChange = { viewModel.comentario = it },
+                onLimpiarClick = { viewModel.limpiarFormularioCompleto() },
+                onPublicarClick = { viewModel.publicarResena() },
+                resumenTexto = viewModel.resumenResenaTexto,
+                progresoBares = viewModel.progresoBaresReseniados,
+                totalBares = viewModel.listaBares.size
+            )
+        }
     }
 }
 
