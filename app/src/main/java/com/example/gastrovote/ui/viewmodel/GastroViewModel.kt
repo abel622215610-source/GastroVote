@@ -1,11 +1,13 @@
 package com.example.gastrovote.ui.viewmodel
 
+import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.mutableStateSetOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.example.gastrovote.MainActivity
 import com.example.gastrovote.model.Bar
 
 class GastroViewModel : ViewModel() {
@@ -81,7 +83,7 @@ class GastroViewModel : ViewModel() {
     // Devuelve true si se publicó con éxito, false si faltaba puntuar
     fun publicarResena(): Boolean {
         if (puntuacionEstrellas == 0) {
-            return false // Requiere validación de estrellas
+            return false
         }
 
         // 1. Cálculo del precio según tamaño (Tapa x1, Media x2, Ración x3)

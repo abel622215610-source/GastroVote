@@ -1,5 +1,6 @@
 package com.example.gastrovote.ui.components
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -42,6 +44,9 @@ fun FormularioComponent(
     totalBares: Int,
     modifier: Modifier = Modifier
 ) {
+
+    val context = LocalContext.current
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -221,7 +226,11 @@ fun FormularioComponent(
             }
 
             Button(
-                onClick = onPublicarClick,
+                onClick = {if (puntuacionEstrellas == 0) {
+                    Toast.makeText(context, "Debes marcar al menos una estrella", Toast.LENGTH_SHORT).show()
+                } else {
+                    onPublicarClick()
+                }},
                 modifier = Modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFb23a1e))
             ) {
