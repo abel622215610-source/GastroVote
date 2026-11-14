@@ -38,10 +38,11 @@ fun FormularioComponent(
     comentario: String,
     onComentarioChange: (String) -> Unit,
     onLimpiarClick: () -> Unit,
-    onPublicarClick: () -> Unit,
+    onPublicarClick: () -> Boolean,
     resumenTexto: String,
     progresoBares: Int,
     totalBares: Int,
+    reseniado: Boolean,
     modifier: Modifier = Modifier
 ) {
 
@@ -229,12 +230,17 @@ fun FormularioComponent(
                 onClick = {if (puntuacionEstrellas == 0) {
                     Toast.makeText(context, "Debes marcar al menos una estrella", Toast.LENGTH_SHORT).show()
                 } else {
-                    onPublicarClick()
+                    val publicado = onPublicarClick()
+                    if(publicado){
+                        val mensaje = if (reseniado) "Reseña actualizada" else "Reseña publicada"
+                        Toast.makeText(context, mensaje, Toast.LENGTH_SHORT).show()
+                    }
                 }},
                 modifier = Modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFb23a1e))
             ) {
-                Text(text = "PUBLICAR RESEÑA", color = Color.White)
+                Text(text = if (reseniado) "ACTUALIZAR RESEÑA" else "PUBLICAR RESEÑA",
+                    color = Color.White)
             }
         }
 

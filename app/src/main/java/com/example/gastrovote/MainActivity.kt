@@ -99,7 +99,8 @@ fun PantallaPrincipalGastroVote(
                 onPublicarClick = { viewModel.publicarResena() },
                 resumenTexto = viewModel.resumenResenaTexto,
                 progresoBares = viewModel.progresoBaresReseniados,
-                totalBares = viewModel.listaBares.size
+                totalBares = viewModel.listaBares.size,
+                reseniado = viewModel.barActualYaReseniado
             )
         }
     }

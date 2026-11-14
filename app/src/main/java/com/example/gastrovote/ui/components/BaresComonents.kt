@@ -1,5 +1,6 @@
 package com.example.gastrovote.ui.components
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -19,6 +20,7 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import com.example.gastrovote.model.Bar
 
 // ==========================================
@@ -139,6 +141,9 @@ fun FichaBarComponent(
     onFavoritoClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+
+    val context = LocalContext.current
+
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -167,7 +172,11 @@ fun FichaBarComponent(
                 )
 
                 // Botón de favorito
-                IconButton(onClick = onFavoritoClick) {
+                IconButton(onClick = {
+                    onFavoritoClick()
+                    val mensaje = if (bar.esFavorito) "Añadido a favoritos" else "Quitado de favoritos"
+                    Toast.makeText(context, mensaje, Toast.LENGTH_SHORT).show()
+                }) {
                     Icon(
                         imageVector = if (bar.esFavorito) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                         contentDescription = "Marcar como favorita",

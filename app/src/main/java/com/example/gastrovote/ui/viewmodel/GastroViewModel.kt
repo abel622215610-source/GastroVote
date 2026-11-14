@@ -54,6 +54,10 @@ class GastroViewModel : ViewModel() {
     val barActual: Bar
         get() = listaBares[indiceBarActual]
 
+    // Indica si el bar actual ya tiene una reseña publicada
+    val barActualYaReseniado: Boolean
+        get() = baresReseniadosSet.contains(barActual.id)
+
     // --- FUNCIONES DE NAVEGACIÓN (L1) ---
     fun siguienteBar() {
         indiceBarActual = (indiceBarActual + 1) % listaBares.size
