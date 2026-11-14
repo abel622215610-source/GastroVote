@@ -13,27 +13,32 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 
-val GastroPrimary = Color(0xFFb23a1e)
+val GastroPrimaryLight = Color(0xFFb23a1e)
+val GastroPrimaryDark = Color(0xFFff6b4a)
 private val DarkColorScheme = darkColorScheme(
-    primary = GastroPrimary,
+    primary = GastroPrimaryDark,
+    onPrimary = Color.Black,
+    primaryContainer = Color(0xFF802209),
+    onPrimaryContainer = Color(0xFFFFDBCE),
     secondary = PurpleGrey80,
-    tertiary = Pink80
+    tertiary = Pink80,
+    background = Color(0xFF121212),
+    onBackground = Color(0xFFE6E1E5),
+    surface = Color(0xFF1E1E1E),
+    onSurface = Color(0xFFE6E1E5)
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = GastroPrimary,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
+    primary = GastroPrimaryLight,
     onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
+    primaryContainer = Color(0xFFFFDBCE),
+    onPrimaryContainer = Color(0xFF380C00),
+    secondary = PurpleGrey40,
+    tertiary = Pink40,
+    background = Color(0xFFFFFBFE),
     onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    surface = Color(0xFFFFFBFE),
+    onSurface = Color(0xFF1C1B1F)
 )
 
 @Composable
