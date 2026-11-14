@@ -56,15 +56,49 @@ class GastroViewModel : ViewModel() {
 
     // Indica si el bar actual ya tiene una reseña publicada
     val barActualYaReseniado: Boolean
-        get() = baresReseniadosSet.contains(barActual.id)
+        get() = barActual.estaReseniado
+
+    // --- MÉTODOS AUXILIARES PARA GUARDAR Y CARGAR EL ESTADO DEL BAR ---
+    private fun guardarEstadoActualEnBar() {
+        val bar = barActual
+        bar.tamanoSeleccionado = tamanoSeleccionado
+        bar.puntuacionEstrellas = puntuacionEstrellas
+        bar.calidadPrecio = calidadPrecio
+        bar.esVegetariana = esVegetariana
+        bar.esSinGluten = esSinGluten
+        bar.esPicante = esPicante
+        bar.meGusta = meGusta
+        bar.descuentoEstudiante = descuentoEstudiante
+        bar.comentario = comentario
+        bar.resumenResenaTexto = resumenResenaTexto
+    }
+
+    private fun cargarEstadoDelBarActual() {
+        val bar = barActual
+        tamanoSeleccionado = bar.tamanoSeleccionado
+        puntuacionEstrellas = bar.puntuacionEstrellas
+        calidadPrecio = bar.calidadPrecio
+        esVegetariana = bar.esVegetariana
+        esSinGluten = bar.esSinGluten
+        esPicante = bar.esPicante
+        meGusta = bar.meGusta
+        descuentoEstudiante = bar.descuentoEstudiante
+        comentario = bar.comentario
+        resumenResenaTexto = bar.resumenResenaTexto
+    }
+
 
     // --- FUNCIONES DE NAVEGACIÓN (L1) ---
     fun siguienteBar() {
+        guardarEstadoActualEnBar()
         indiceBarActual = (indiceBarActual + 1) % listaBares.size
+        cargarEstadoDelBarActual()
     }
 
     fun anteriorBar() {
+        guardarEstadoActualEnBar()
         indiceBarActual = if (indiceBarActual - 1 < 0) listaBares.size - 1 else indiceBarActual - 1
+        cargarEstadoDelBarActual()
     }
 
     // --- FAVORITOS (L2) ---
@@ -90,7 +124,7 @@ class GastroViewModel : ViewModel() {
             return false
         }
 
-        // 1. Cálculo del precio según tamaño (Tapa x1, Media x2, Ración x3)
+        // 1. Cálculo del precio según tamaño
         val multiplicador = when (tamanoSeleccionado) {
             "Media ración" -> 2
             "Ración" -> 3
@@ -122,8 +156,12 @@ class GastroViewModel : ViewModel() {
             Comentario: ${if (comentario.isBlank()) "Sin comentarios" else comentario}
         """.trimIndent()
 
-        // 5. Registrar en la ruta (bares distintos)
+        // 5. Marcar como reseñado y registrar la ruta
+        barActual.estaReseniado = true
         baresReseniadosSet.add(barActual.id)
+
+        // 6. Guardar estado
+        guardarEstadoActualEnBar()
 
         return true
     }
@@ -139,5 +177,21 @@ class GastroViewModel : ViewModel() {
         meGusta = false
         descuentoEstudiante = false
         comentario = ""
+        resumenResenaTexto = ""
+
+        //Limpiar reseña formulario
+        barActual.tamanoSeleccionado = "Tapa"
+        barActual.puntuacionEstrellas = 0
+        barActual.calidadPrecio = 5f
+        barActual.esVegetariana = false
+        barActual.esSinGluten = false
+        barActual.esPicante = false
+        barActual.meGusta = false
+        barActual.descuentoEstudiante = false
+        barActual.comentario = ""
+        barActual.resumenResenaTexto = ""
+        barActual.estaReseniado = false
+
+        baresReseniadosSet.remove(barActual.id)
     }
 }

@@ -110,12 +110,11 @@ fun FormularioComponent(
             }
 
             val textoOpinion = when (puntuacionEstrellas) {
-                1 -> "Terrible"
-                2 -> "Aceptable"
-                3 -> "Bueno"
-                4 -> "Muy bueno"
-                5 -> "¡Espectacular!"
-                else -> ""
+                1 -> "Mejorable"
+                2 -> "Correcta"
+                3 -> "¡Muy buena!"
+                4, 5 -> "¡Espectacular!"
+                else -> "Sin puntuar"
             }
             Text(
                 text = textoOpinion,
@@ -284,5 +283,6 @@ fun FormularioComponent(
             color = Color(0xFFb23a1e),
             trackColor = Color.LightGray
         )
+        Spacer(modifier = Modifier.height(40.dp))
     }
 }
