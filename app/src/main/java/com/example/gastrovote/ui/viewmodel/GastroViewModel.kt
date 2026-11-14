@@ -166,6 +166,15 @@ class GastroViewModel : ViewModel() {
         return true
     }
 
+    fun mostrarDialogoLimpiarConfirmacion(mostrar: Boolean) {
+        mostrarDialogoLimpiar = mostrar
+    }
+
+    fun confirmarLimpiarFormulario() {
+        limpiarFormularioCompleto()
+        mostrarDialogoLimpiar = false
+    }
+
     // --- LIMPIAR FORMULARIO (L8) ---
     fun limpiarFormularioCompleto() {
         tamanoSeleccionado = "Tapa"

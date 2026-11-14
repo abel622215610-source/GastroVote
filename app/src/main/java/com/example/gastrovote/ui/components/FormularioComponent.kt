@@ -43,6 +43,9 @@ fun FormularioComponent(
     progresoBares: Int,
     totalBares: Int,
     reseniado: Boolean,
+    mostrarDialogoLimpiar: Boolean,
+    onMostrarDialogoChange: (Boolean) -> Unit,
+    onConfirmarLimpiar: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -218,7 +221,7 @@ fun FormularioComponent(
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Button(
-                onClick = onLimpiarClick,
+                onClick = { onMostrarDialogoChange(true) },
                 modifier = Modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFd8cbe8))
             ) {
@@ -284,5 +287,30 @@ fun FormularioComponent(
             trackColor = Color.LightGray
         )
         Spacer(modifier = Modifier.height(40.dp))
+
+        if (mostrarDialogoLimpiar) {
+            AlertDialog(
+                onDismissRequest = { onMostrarDialogoChange(false) },
+                title = { Text(text = "Borrar reseña") },
+                text = { Text(text = "¿Borrar la reseña?") },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            onConfirmarLimpiar()
+                            Toast.makeText(context, "Formulario limpio", Toast.LENGTH_SHORT).show()
+                        }
+                    ) {
+                        Text(text = "Sí, borrar", color = Color(0xFFb23a1e))
+                    }
+                },
+                dismissButton = {
+                    TextButton(
+                        onClick = { onMostrarDialogoChange(false) }
+                    ) {
+                        Text(text = "Cancelar")
+                    }
+                }
+            )
+        }
     }
 }
