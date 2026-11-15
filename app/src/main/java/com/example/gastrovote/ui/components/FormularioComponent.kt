@@ -12,9 +12,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.example.gastrovote.R
 
 @Composable
 fun FormularioComponent(
@@ -51,6 +53,13 @@ fun FormularioComponent(
 
     val context = LocalContext.current
 
+    //Mensajes para los Toast
+    val msgErrorEstrellas = stringResource(R.string.toast_error_estrellas)
+    val msgActualizada = stringResource(R.string.toast_resena_actualizada)
+    val msgPublicada = stringResource(R.string.toast_resena_publicada)
+    val msgLimpio = stringResource(R.string.toast_limpio)
+    val textoProgreso = stringResource(R.string.formato_progreso_ruta, progresoBares, totalBares)
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -59,7 +68,7 @@ fun FormularioComponent(
 
         // TÍTULO SECCIÓN "TU RESEÑA"
         Text(
-            text = "TU RESEÑA",
+            text = stringResource(R.string.etiqueta_tu_resena),
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary
@@ -73,7 +82,7 @@ fun FormularioComponent(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text(text = "Tamaño", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
+            Text(text = stringResource(R.string.label_tamano), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
 
             listOf("Tapa", "Media", "Ración").forEach { opcion ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -113,11 +122,11 @@ fun FormularioComponent(
             }
 
             val textoOpinion = when (puntuacionEstrellas) {
-                1 -> "Mejorable"
-                2 -> "Correcta"
-                3 -> "¡Muy buena!"
-                4, 5 -> "¡Espectacular!"
-                else -> "Sin puntuar"
+                1 -> stringResource(R.string.op_mejorable)
+                2 -> stringResource(R.string.op_correcta)
+                3 -> stringResource(R.string.op_muy_buena)
+                4, 5 -> stringResource(R.string.op_espectacular)
+                else -> stringResource(R.string.op_sin_puntuar)
             }
             Text(
                 text = textoOpinion,
@@ -135,7 +144,7 @@ fun FormularioComponent(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = "Calidad-precio", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
+            Text(text = stringResource(R.string.label_calidad_precio), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
             Text(text = "${calidadPrecio.toInt()}/10", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
         }
         Slider(
@@ -156,15 +165,15 @@ fun FormularioComponent(
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Checkbox(checked = esVegetariana, onCheckedChange = onVegetarianaChange)
-                Text(text = "Vegetariana", style = MaterialTheme.typography.bodySmall)
+                Text(text = stringResource(R.string.label_vegetariana), style = MaterialTheme.typography.bodySmall)
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Checkbox(checked = esSinGluten, onCheckedChange = onSinGlutenChange)
-                Text(text = "Sin gluten", style = MaterialTheme.typography.bodySmall)
+                Text(text = stringResource(R.string.label_sin_gluten), style = MaterialTheme.typography.bodySmall)
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Checkbox(checked = esPicante, onCheckedChange = onPicanteChange)
-                Text(text = "Picante", style = MaterialTheme.typography.bodySmall)
+                Text(text = stringResource(R.string.label_picante), style = MaterialTheme.typography.bodySmall)
             }
         }
 
@@ -177,7 +186,7 @@ fun FormularioComponent(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(text = "Me gusta", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
+                Text(text = stringResource(R.string.label_me_gusta), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.width(8.dp))
                 Switch(
                     checked = meGusta,
@@ -186,7 +195,7 @@ fun FormularioComponent(
                 )
             }
             Text(
-                text = if (meGusta) "¡Te gusta esta tapa!" else "",
+                text = if (meGusta) stringResource(R.string.msg_te_gusta_tapa) else "",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.primary
             )
@@ -200,7 +209,7 @@ fun FormularioComponent(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Checkbox(checked = descuentoEstudiante, onCheckedChange = onDescuentoChange)
-            Text(text = "Descuento estudiante (10%)", style = MaterialTheme.typography.bodyMedium)
+            Text(text = stringResource(R.string.label_descuento), style = MaterialTheme.typography.bodyMedium)
         }
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -210,7 +219,7 @@ fun FormularioComponent(
             value = comentario,
             onValueChange = onComentarioChange,
             modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text("Muy buena, repetiría la próxima semana") },
+            placeholder = { Text(stringResource(R.string.hint_comentario)) },
             singleLine = true,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
         )
@@ -225,23 +234,23 @@ fun FormularioComponent(
                 modifier = Modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFd8cbe8))
             ) {
-                Text(text = "LIMPIAR", color = Color.Black)
+                Text(text = stringResource(R.string.btn_limpiar), color = Color.Black)
             }
 
             Button(
                 onClick = {if (puntuacionEstrellas == 0) {
-                    Toast.makeText(context, "Debes marcar al menos una estrella", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, msgErrorEstrellas, Toast.LENGTH_SHORT).show()
                 } else {
                     val publicado = onPublicarClick()
                     if(publicado){
-                        val mensaje = if (reseniado) "Reseña actualizada" else "Reseña publicada"
+                        val mensaje = if (reseniado) msgActualizada else msgPublicada
                         Toast.makeText(context, mensaje, Toast.LENGTH_SHORT).show()
                     }
                 }},
                 modifier = Modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFb23a1e))
             ) {
-                Text(text = if (reseniado) "ACTUALIZAR RESEÑA" else "PUBLICAR RESEÑA",
+                Text(text = if (reseniado) stringResource(R.string.btn_actualizar) else stringResource(R.string.btn_publicar),
                     color = Color.White)
             }
         }
@@ -272,7 +281,7 @@ fun FormularioComponent(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Ruta: $progresoBares de $totalBares bares",
+                text = textoProgreso,
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold
             )
@@ -291,23 +300,23 @@ fun FormularioComponent(
         if (mostrarDialogoLimpiar) {
             AlertDialog(
                 onDismissRequest = { onMostrarDialogoChange(false) },
-                title = { Text(text = "Borrar reseña") },
-                text = { Text(text = "¿Borrar la reseña?") },
+                title = { Text(text = stringResource(R.string.dialogo_titulo)) },
+                text = { Text(text = stringResource(R.string.dialogo_mensaje)) },
                 confirmButton = {
                     TextButton(
                         onClick = {
                             onConfirmarLimpiar()
-                            Toast.makeText(context, "Formulario limpio", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, msgLimpio, Toast.LENGTH_SHORT).show()
                         }
                     ) {
-                        Text(text = "Sí, borrar", color = Color(0xFFb23a1e))
+                        Text(text = stringResource(R.string.dialogo_btn_si), color = Color(0xFFb23a1e))
                     }
                 },
                 dismissButton = {
                     TextButton(
                         onClick = { onMostrarDialogoChange(false) }
                     ) {
-                        Text(text = "Cancelar")
+                        Text(text = stringResource(R.string.dialogo_btn_cancelar))
                     }
                 }
             )

@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import com.example.gastrovote.model.Bar
 
 // ==========================================
@@ -58,7 +59,7 @@ fun CabeceraComponent(
                 color = MaterialTheme.colorScheme.primary
             )
             Text(
-                text = "Ruta de la tapa",
+                text = stringResource(R.string.titulo_ruta),
                 style = MaterialTheme.typography.titleMedium
             )
         }
@@ -84,7 +85,7 @@ fun SelectorBarComponent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "ELIGE EL BAR",
+            text = stringResource(R.string.etiqueta_elige_bar),
             style = MaterialTheme.typography.labelLarge,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.fillMaxWidth()
@@ -115,7 +116,7 @@ fun SelectorBarComponent(
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = "Bar ${indiceActual + 1} de $totalBares",
+                    text = stringResource(R.string.formato_posicion_bar, indiceActual + 1, totalBares),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -143,6 +144,8 @@ fun FichaBarComponent(
 ) {
 
     val context = LocalContext.current
+    val msgAnadido = stringResource(R.string.toast_favorito_anadido)
+    val msgQuitado = stringResource(R.string.toast_favorito_quitado)
 
     Card(
         modifier = modifier
@@ -174,7 +177,7 @@ fun FichaBarComponent(
                 // Botón de favorito
                 IconButton(onClick = {
                     onFavoritoClick()
-                    val mensaje = if (bar.esFavorito) "Añadido a favoritos" else "Quitado de favoritos"
+                    val mensaje = if (bar.esFavorito) msgAnadido else msgQuitado
                     Toast.makeText(context, mensaje, Toast.LENGTH_SHORT).show()
                 }) {
                     Icon(

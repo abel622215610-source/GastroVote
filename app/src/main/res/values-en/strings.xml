@@ -1,0 +1,71 @@
+<resources>
+    <!-- Textos generales traducidos al inglés -->
+    <string name="app_name">GastroVote</string>
+    <string name="titulo_ruta">Tapas Route</string>
+    <string name="etiqueta_elige_bar">CHOOSE BAR</string>
+    <string name="etiqueta_tu_resena">YOUR REVIEW</string>
+    <string name="btn_limpiar">CLEAR</string>
+    <string name="btn_publicar">PUBLISH REVIEW</string>
+    <string name="btn_actualizar">UPDATE REVIEW</string>
+    <string name="label_tamano">Size</string>
+    <string name="label_puntuacion">Rating</string>
+    <string name="label_calidad_precio">Value for money</string>
+    <string name="label_vegetariana">Vegetarian</string>
+    <string name="label_sin_gluten">Gluten-free</string>
+    <string name="label_picante">Spicy</string>
+    <string name="label_me_gusta">I like it</string>
+    <string name="label_descuento">Student discount (10%)</string>
+    <string name="hint_comentario">Add an optional comment...</string>
+    <string name="dialogo_titulo">Delete review</string>
+    <string name="dialogo_mensaje">Delete the review?</string>
+    <string name="dialogo_btn_si">Yes, delete</string>
+    <string name="dialogo_btn_cancelar">Cancel</string>
+    <string name="toast_limpio">Form cleared</string>
+    <string name="op_mejorable">Needs improvement</string>
+    <string name="op_correcta">Fair</string>
+    <string name="op_muy_buena">Very good!</string>
+    <string name="op_espectacular">Spectacular!</string>
+    <string name="op_sin_puntuar">Unrated</string>
+    <string name="msg_te_gusta_tapa">You like this tapa!</string>
+    <string name="toast_error_estrellas">You must select at least one star</string>
+    <string name="toast_resena_actualizada">Review updated</string>
+    <string name="toast_resena_publicada">Review published</string>
+    <string name="formato_progreso_ruta">Route: %1$d of %2$d bars</string>
+    <string name="formato_posicion_bar">Bar %1$d of %2$d</string>
+    <string name="toast_favorito_anadido">Added to favorites</string>
+    <string name="toast_favorito_quitado">Removed from favorites</string>
+
+    <!-- Catálogo de Bares y Tapas -->
+    <string-array name="array_nombres_bares" translatable="false">
+        <item>Taberna La Marinera</item>
+        <item>Bar El Rinconcito</item>
+        <item>Rincón Murciano</item>
+        <item>La Tapa d\'Aki</item>
+        <item>Bar Central</item>
+        <item>Mesón El Sabor</item>
+        <item>La Bodeguita</item>
+        <item>El Último trago</item>
+    </string-array>
+
+    <string-array name="array_nombres_tapas" translatable="false">
+        <item>Marinera</item>
+        <item>Croqueta Casera</item>
+        <item>Pisto Huertano</item>
+        <item>Marinerito</item>
+        <item>Caballitos</item>
+        <item>Pulpo a la Murciana</item>
+        <item>Montadito de Lomo</item>
+        <item>Paparajote</item>
+    </string-array>
+
+    <string-array name="array_descripciones_tapas">
+        <item>Russian salad and anchovy on a bread ring</item>
+        <item>Creamy Iberian ham croquette</item>
+        <item>Traditional ratatouille with quail egg</item>
+        <item>Variant with vinegar-cured anchovy</item>
+        <item>Crispy battered prawns</item>
+        <item>Tender baked octopus with paprika</item>
+        <item>Cured pork loin with goat cheese</item>
+        <item>Lemon leaf with fried batter and sugar</item>
+    </string-array>
+</resources>

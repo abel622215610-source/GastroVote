@@ -1,3 +1,70 @@
 <resources>
     <string name="app_name">GastroVote</string>
+    <string name="titulo_ruta">Ruta de la tapa</string>
+    <string name="etiqueta_elige_bar">ELIGE EL BAR</string>
+    <string name="etiqueta_tu_resena">TU RESEÑA</string>
+    <string name="btn_limpiar">LIMPIAR</string>
+    <string name="btn_publicar">PUBLICAR RESEÑA</string>
+    <string name="btn_actualizar">ACTUALIZAR RESEÑA</string>
+    <string name="label_tamano">Tamaño</string>
+    <string name="label_puntuacion">Puntuación</string>
+    <string name="label_calidad_precio">Calidad-precio</string>
+    <string name="label_vegetariana">Vegetariana</string>
+    <string name="label_sin_gluten">Sin gluten</string>
+    <string name="label_picante">Picante</string>
+    <string name="label_me_gusta">Me gusta</string>
+    <string name="label_descuento">Descuento estudiante (10%)</string>
+    <string name="hint_comentario">Añade un comentario opcional...</string>
+    <string name="dialogo_titulo">Borrar reseña</string>
+    <string name="dialogo_mensaje">¿Borrar la reseña?</string>
+    <string name="dialogo_btn_si">Sí, borrar</string>
+    <string name="dialogo_btn_cancelar">Cancelar</string>
+    <string name="toast_limpio">Formulario limpio</string>
+    <string name="op_mejorable">Mejorable</string>
+    <string name="op_correcta">Correcta</string>
+    <string name="op_muy_buena">¡Muy buena!</string>
+    <string name="op_espectacular">¡Espectacular!</string>
+    <string name="op_sin_puntuar">Sin puntuar</string>
+    <string name="msg_te_gusta_tapa">¡Te gusta esta tapa!</string>
+    <string name="toast_error_estrellas">Debes marcar al menos una estrella</string>
+    <string name="toast_resena_actualizada">Reseña actualizada</string>
+    <string name="toast_resena_publicada">Reseña publicada</string>
+    <string name="formato_progreso_ruta">Ruta: %1$d de %2$d bares</string>
+    <string name="formato_posicion_bar">Bar %1$d de %2$d</string>
+    <string name="toast_favorito_anadido">Añadido a favoritos</string>
+    <string name="toast_favorito_quitado">Quitado de favoritos</string>
+
+    <!-- Catálogo de Bares y Tapas (string-array) -->
+    <string-array name="array_nombres_bares">
+        <item>Taberna La Marinera</item>
+        <item>Bar El Rinconcito</item>
+        <item>Rincón Murciano</item>
+        <item>La Tapa d\'Aki</item>
+        <item>Bar Central</item>
+        <item>Mesón El Sabor</item>
+        <item>La Bodeguita</item>
+        <item>El Último trago</item>
+    </string-array>
+
+    <string-array name="array_nombres_tapas">
+        <item>Marinera</item>
+        <item>Croqueta Casera</item>
+        <item>Pisto Huertano</item>
+        <item>Marinerito</item>
+        <item>Caballitos</item>
+        <item>Pulpo a la Murciana</item>
+        <item>Montadito de Lomo</item>
+        <item>Paparajote</item>
+    </string-array>
+
+    <string-array name="array_descripciones_tapas">
+        <item>Rosadilla con ensaladilla y anchoa</item>
+        <item>Croqueta cremosa de jamón ibérico</item>
+        <item>Pisto tradicional con huevo de codorniz</item>
+        <item>Variante con boquerón en vinagre</item>
+        <item>Gambas en gabardina crujientes</item>
+        <item>Pulpo tierno al horno con pimentón</item>
+        <item>Lomo adobado con queso de cabra</item>
+        <item>Hoja de limón con masa frita y azúcar</item>
+    </string-array>
 </resources>
