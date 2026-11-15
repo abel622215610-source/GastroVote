@@ -24,9 +24,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.example.gastrovote.model.Bar
 
-// ==========================================
-// A. CABECERA DE LA APP
-// ==========================================
+// CABECERA DE LA APP
 @Composable
 fun CabeceraComponent(
     modifier: Modifier = Modifier
@@ -66,9 +64,7 @@ fun CabeceraComponent(
     }
 }
 
-// ==========================================
-// B. ELIGE EL BAR (SELECTOR CIRCULAR)
-// ==========================================
+// ELIGE EL BAR (SELECTOR CIRCULAR)
 @Composable
 fun SelectorBarComponent(
     nombreBarActual: String,
@@ -133,9 +129,7 @@ fun SelectorBarComponent(
     }
 }
 
-// ==========================================
-// C. FICHA DEL BAR (TARJETA)
-// ==========================================
+// FICHA DEL BAR (TARJETA)
 @Composable
 fun FichaBarComponent(
     bar: Bar,
@@ -161,7 +155,7 @@ fun FichaBarComponent(
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            // Fila superior: Nombre de la Tapa y Botón Favorito (Corazón)
+            // Fila superior: Nombre de la Tapa y Botón de Favorito
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,

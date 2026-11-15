@@ -72,7 +72,6 @@ class GastroViewModel : ViewModel() {
         bar.comentario = comentario
         bar.resumenResenaTexto = resumenResenaTexto
     }
-
     private fun cargarEstadoDelBarActual() {
         val bar = barActual
         tamanoSeleccionado = bar.tamanoSeleccionado
@@ -87,8 +86,7 @@ class GastroViewModel : ViewModel() {
         resumenResenaTexto = bar.resumenResenaTexto
     }
 
-
-    // --- FUNCIONES DE NAVEGACIÓN (L1) ---
+    // --- FUNCIONES DE NAVEGACIÓN ---
     fun siguienteBar() {
         guardarEstadoActualEnBar()
         indiceBarActual = (indiceBarActual + 1) % listaBares.size
@@ -101,30 +99,21 @@ class GastroViewModel : ViewModel() {
         cargarEstadoDelBarActual()
     }
 
-    // --- FAVORITOS (L2) ---
-
     fun alternarFavoritoBarActual() {
-        // 1. Cogemos el objeto Bar en el que estamos posicionados ahora mismo
         val barActual = listaBares[indiceBarActual]
 
-        // 2. Invertimos su estado de favorito (si era falso pasa a true, y viceversa)
-        barActual.esFavorito = !barActual.esFavorito
+        val barModificado = barActual.copy(esFavorito = !barActual.esFavorito)
 
-        // 3. ¡LA CLAVE!: Como listaBares es un 'mutableStateListOf', a veces
-        // cambiar una propiedad interna de un objeto no hace que Compose se entere
-        // al milisegundo. Al hacer esta reasignación en el índice exacto...
         val index = indiceBarActual
-        listaBares[index] = barActual // ...obligamos a Compose a detectar el cambio y redibujar al instante.
+        listaBares[index] = barModificado
     }
 
-    // --- PUBLICAR RESEÑA (L6, L7) ---
-    // Devuelve true si se publicó con éxito, false si faltaba puntuar
     fun publicarResena(): Boolean {
         if (puntuacionEstrellas == 0) {
             return false
         }
 
-        // 1. Cálculo del precio según tamaño
+        // Cálculo del precio según tamaño
         val multiplicador = when (tamanoSeleccionado) {
             "Media ración" -> 2
             "Ración" -> 3
@@ -132,11 +121,11 @@ class GastroViewModel : ViewModel() {
         }
         val precioBaseTotal = barActual.precioBase * multiplicador
 
-        // 2. Descuento de estudiante (10%)
+        // Descuento de estudiante (10%)
         val descuento = if (descuentoEstudiante) precioBaseTotal * 0.10 else 0.0
         val precioFinal = precioBaseTotal - descuento
 
-        // 3. Generar texto de opinión de estrellas
+        // Generar texto de opinión de estrellas
         val textoOpinion = when (puntuacionEstrellas) {
             1 -> "Mejorable"
             2 -> "Correcta"
@@ -145,7 +134,7 @@ class GastroViewModel : ViewModel() {
             else -> "Sin puntuar"
         }
 
-        // 4. Construir resumen detallado
+        // Construir resumen detallado
         resumenResenaTexto = """
             ${barActual.nombreBar} - ${barActual.nombreTapa}
             Tamaño: $tamanoSeleccionado - Puntuación: $puntuacionEstrellas/5 ($textoOpinion)
@@ -156,11 +145,11 @@ class GastroViewModel : ViewModel() {
             Comentario: ${if (comentario.isBlank()) "Sin comentarios" else comentario}
         """.trimIndent()
 
-        // 5. Marcar como reseñado y registrar la ruta
+        // Marcar como reseñado y registrar la ruta
         barActual.estaReseniado = true
         baresReseniadosSet.add(barActual.id)
 
-        // 6. Guardar estado
+        // Guardar estado
         guardarEstadoActualEnBar()
 
         return true
@@ -175,7 +164,7 @@ class GastroViewModel : ViewModel() {
         mostrarDialogoLimpiar = false
     }
 
-    // --- LIMPIAR FORMULARIO (L8) ---
+    // --- LIMPIAR FORMULARIO ---
     fun limpiarFormularioCompleto() {
         tamanoSeleccionado = "Tapa"
         puntuacionEstrellas = 0

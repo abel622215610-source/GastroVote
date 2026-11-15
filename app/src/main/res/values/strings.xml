@@ -34,7 +34,7 @@
     <string name="toast_favorito_anadido">Añadido a favoritos</string>
     <string name="toast_favorito_quitado">Quitado de favoritos</string>
 
-    <!-- Catálogo de Bares y Tapas (string-array) -->
+    <!-- Catálogo de Bares y Tapas  -->
     <string-array name="array_nombres_bares">
         <item>Taberna La Marinera</item>
         <item>Bar El Rinconcito</item>
